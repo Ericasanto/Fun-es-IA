@@ -4,17 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
-<title>Você sobrevireria a um apocalipse zumbi?</title>
+<title>Qual personagem do Shrek você seria?</title>
 </head>
 <body>
 <div class="caixa-principal">
-<h1>Você sobreviveria a um apocalipse zumbi?</h1>
-<div class=" caixa-perguntas"></div>
-<div class=" caixa-alternativas"></div>
-<div class=" caixa-resultados"></div>
-<p class="texto-resultado"></p>
+    <h1>Qual personagem do Shrek você seria?</h1>
+    <div class="caixa-perguntas" id="questions-container"></div>
+    <div class="caixa-navegacao">
+        <button id="prev-btn" onclick="prevQuestion()" disabled>Anterior</button>
+        <button id="next-btn" onclick="nextQuestion()">Próxima</button>
+    </div>
+    <div class="caixa-resultados">
+        <p id="result" class="texto-resultado"></p>
+    </div>
+    <button id="submit-btn" type="button" onclick="calculateResult()" style="display:none;">Descubra!</button>
 </div>
 </body>
 <script src="main.js"></script>
-
 </html>

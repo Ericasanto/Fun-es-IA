@@ -1,92 +1,156 @@
-const caixaPrincipal = document.querySelector(".caixa-principal");
-const caixaPerguntas = document.querySelector(".caixa-perguntas");
-const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultados = document.querySelector(".caixa-resultados");
-const textoResultados = document.querySelector(".texto-resultados");
+// main.js
 
-const perguntas = [
+const questions = [
     {
-        enunciado: "Você tem um plano de evacuação para sua casa?",
-        alternativas:[
-           " a)Sim",
-           " b)Não",
-           " c)Estou trabalhando nisso"
+        question: "Qual é a sua atividade favorita?",
+        options: [
+            "Ficar sozinho em casa",
+            "Fazer novas amizades",
+            "Organizar festas e eventos",
+            "Explorar lugares novos",
+            "Viajar e experimentar novas culturas"
         ]
     },
     {
-        enunciado: "Qual é o seu nível de conhecimento sobre primeiros socorros?",
-    alternativas:[
-       " a)Avançado",
-       "b)Intermediário",
-       "c)Básico",
-       "d)Nenhum"
-    ]
+        question: "Como você lida com problemas?",
+        options: [
+            "Prefiro resolver sozinho",
+            "Busco ajuda dos amigos",
+            "Tento encontrar uma solução criativa",
+            "Enfrento de frente, sem medo",
+            "Uso meu charme e astúcia para resolver"
+        ]
     },
     {
-        enunciado: "Você está em um supermercado e ouve zumbis se aproximando. O que você faz?    ",
-         alternativas:[
-       "a)Pegar o máximo de suprimentos possível e sair correndo sem se preocupar com o barulho.",
-       "b) Buscar uma saída segura e deixar uma pista falsa para os zumbis se distraírem.",
-       "c) Tentar se esconder em um dos corredores até que os zumbis saiam.",
-       "d) Fazer uma barricada improvisada e esperar os zumbis saírem antes de continuar."
-    ]
+        question: "Qual é a sua comida favorita?",
+        options: [
+            "Comida caseira",
+            "Pratos exóticos",
+            "Doces e guloseimas",
+            "Pizza e fast food",
+            "Pratos sofisticados e gourmet"
+        ]
     },
     {
-        enunciado: "Você encontra um grupo de sobreviventes que parece amigável, mas não tem certeza de suas intenções. O que você faz?",
-        alternativas:[
-       "a) Se aproximar imediatamente e oferecer ajuda, sem pensar duas vezes.",
-       "b) Observar de longe e procurar sinais de que são confiáveis antes de se aproximar.",
-       "c) Evitar o grupo e seguir seu próprio caminho para não correr riscos.",
-       "d) Tentar formar uma aliança sem garantias, pois a força em números é importante."
-    ]
+        question: "Qual é o seu tipo de humor?",
+        options: [
+            "Sarcástico e irônico",
+            "Divertido e engraçado",
+            "Inteligente e perspicaz",
+            "Despreocupado e leve",
+            "Dramático e intenso"
+        ]
     },
     {
-        enunciado: "Você precisa viajar através de uma cidade cheia de zumbis. Qual é a melhor estratégia?",
-        alternativas:[
-       "a) Ir pela rota mais direta, assumindo que você pode lidar com qualquer zumbi que apareça.",
-       "b) Planejar uma rota segura, evitando áreas de alto risco e movendo-se silenciosamente.",
-       "c) Criar distrações para os zumbis enquanto você se move pela cidade.",
-       "d) Esperar até a noite, quando há menos zumbis, para fazer a travessia."
-    ]
+        question: "Qual é a sua atividade favorita em um dia livre?",
+        options: [
+            "Assistir a filmes e relaxar",
+            "Fazer esportes ou atividades ao ar livre",
+            "Ler um bom livro",
+            "Reunir-se com amigos para uma festa",
+            "Trabalhar em projetos pessoais ou criativos"
+        ]
     },
     {
-        enunciado: "Você descobre que um membro do grupo está doente. Qual é a melhor abordagem?    ",
-         alternativas:[
-       "a) Isolar o doente para evitar a propagação da doença e buscar tratamento imediato.",
-       "b) Fornecer cuidados básicos e esperar que a doença passe sem tratamento especializado.",
-       "c) Deixar o doente para trás e se concentrar na sobrevivência do grupo.",
-       "d) Tentar buscar ajuda médica em uma área potencialmente perigosa."
-    ]
-    },
-    {
-        enunciado: "Qual seria o seu plano de sobrevivência a longo prazo?",
-        alternativas:[
-       "a) Formar uma comunidade com outros sobreviventes e construir um assentamento fortificado.",
-       "b) Viajar constantemente para evitar a infestação e buscar novos suprimentos.",
-       "c) Viver escondido em um local remoto e esperar que a situação se resolva por si mesma.",
-       "d) Tentar encontrar uma cura ou solução científica para o surto."
-    ]
+        question: "Como você prefere passar seu tempo livre?",
+        options: [
+            "Sozinho, aproveitando a solitude",
+            "Com amigos e família, socializando",
+            "Em atividades criativas e artísticas",
+            "Aventurando-se e explorando novos lugares",
+            "Organizando eventos e sendo o anfitrião"
+        ]
     }
 ];
 
+let currentQuestionIndex = 0;
 
-let atual = 0;
-let perguntaAtual;
+function showQuestion(index) {
+    const container = document.getElementById('questions-container');
+    container.innerHTML = ''; // Limpa o conteúdo atual
 
-function mostraPergunta() {
-    perguntaAtual = perguntas[atual];
-    caixaPerguntas.textContent = perguntaAtual.enunciado;
-    mostraAlternativas(); 
+    const q = questions[index];
+
+    const questionDiv = document.createElement('div');
+    questionDiv.className = 'question';
+
+    const questionText = document.createElement('p');
+    questionText.textContent = `${index + 1}. ${q.question}`;
+    questionDiv.appendChild(questionText);
+
+    q.options.forEach((option, i) => {
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="radio" name="q${index}" value="${i + 1}"> ${option}`;
+        questionDiv.appendChild(label);
+        questionDiv.appendChild(document.createElement('br'));
+    });
+
+    container.appendChild(questionDiv);
+
+    document.getElementById('prev-btn').style.display = (index === 0) ? 'none' : 'inline-block';
+    document.getElementById('next-btn').style.display = (index === questions.length - 1) ? 'none' : 'inline-block';
+    document.getElementById('submit-btn').style.display = (index === questions.length - 1) ? 'inline-block' : 'none';
 }
 
-function mostraAlternativas() {
-    caixaAlternativas.innerHTML = ''; 
-
-    for (const alternativa of perguntaAtual.alternativas) {
-        const botaoAlternativas = document.createElement("button");
-        botaoAlternativas.textContent = alternativa;
-        caixaAlternativas.appendChild(botaoAlternativas);
+function nextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion(currentQuestionIndex);
     }
 }
 
-mostraPergunta(); 
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        showQuestion(currentQuestionIndex);
+    }
+}
+
+function calculateResult() {
+    const answers = document.querySelectorAll('input[type=radio]:checked');
+    
+    if (answers.length < questions.length) {
+        document.getElementById('result').innerHTML = '<p>Por favor, responda a todas as perguntas para ver o resultado.</p>';
+        return;
+    }
+
+    let scores = [0, 0, 0, 0, 0, 0, 0]; // Pontuações para Shrek, Donkey, Fiona, Lord Farquaad, Gato de Botas, Pinóquio, Biscoito
+
+    answers.forEach(answer => {
+        scores[parseInt(answer.value) - 1]++;
+    });
+
+    const maxScore = Math.max(...scores);
+    const resultIndex = scores.indexOf(maxScore);
+
+    const characters = [
+        { name: 'Shrek', description: 'Você seria o Shrek! Assim como o Shrek, você valoriza sua privacidade, tem um coração generoso e é leal aos amigos.', img: 'shrek.jpg' },
+        { name: 'Burro', description: 'Você seria o Burro! Você é amigável, falante e adora estar cercado de pessoas. Seu entusiasmo é contagiante.', img: 'donkey.jpg' },
+        { name: 'Fiona', description: 'Você seria a Fiona! Forte e determinada, você sabe o que quer e luta pelos seus objetivos. Além disso, você tem um grande coração.', img: 'fiona.jpg' },
+        { name: 'Lord Farquaad', description: 'Você seria o Lord Farquaad! Você é ambicioso e adora estar no controle. Você pode ser um pouco exigente, mas sempre busca o melhor.', img: 'farquaad.jpg' },
+        { name: 'Gato de Botas', description: 'Você seria o Gato de Botas! Charmoso e astuto, você sabe como usar seu charme para sair de situações complicadas e adora aventuras.', img: 'puss_in_boots.jpg' },
+        { name: 'Pinóquio', description: 'Você seria o Pinóquio! Ingênuo e curioso, você tem um grande desejo de ser honesto e sempre quer fazer o melhor para os outros.', img: 'pinocchio.jpg' },
+        { name: 'Biscoito', description: 'Você seria o Biscoito! Divertido e despreocupado, você tem uma personalidade leve e adora fazer os outros rirem.', img: 'cookie.jpg' }
+    ];
+
+    const character = characters[resultIndex];
+    document.getElementById('result').innerHTML = `
+        <p>${character.description}</p>
+        <img src="${character.img}" alt="${character.name}">
+    `;
+
+    // Ocultar botões de navegação e exibir apenas o botão de resultado
+    document.getElementById('prev-btn').style.display = 'none';
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('submit-btn').style.display = 'none';
+}
+
+// Inicializar o quiz mostrando a primeira pergunta
+window.onload = () => {
+    showQuestion(currentQuestionIndex);
+
+    document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+    document.getElementById('next-btn').addEventListener('click', nextQuestion);
+    document.getElementById('submit-btn').addEventListener('click', calculateResult);
+};
+
