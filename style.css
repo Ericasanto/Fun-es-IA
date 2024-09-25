@@ -1,77 +1,74 @@
-/* style.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #eaf9e8; /* Verde claro de fundo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+* {
+  box-sizing: border-box;
 }
 
-.caixa-principal {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #bff8cb;
+  color: #1c6855;
+  text-align: center;
   padding: 20px;
-  width: 80%;
+}
+
+.container {
   max-width: 600px;
-  border: 2px solid #4CAF50; /* Verde borda */
+  margin: 0 auto;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #4CAF50; /* Verde do título */
-}
-
-.caixa-perguntas {
   margin-bottom: 20px;
 }
 
-.question {
+#quiz-container, #result-container {
+  margin-top: 20px;
+}
+
+#progress-bar {
+  width: 100%;
+  background: linear-gradient(to right, rgb(37, 139, 80), rgb(142, 245, 83));
+  height: 20px;
   margin-bottom: 20px;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: #333;
+#progress-bar div {
+  height: 100%;
+  background-color: #3f9241;
+  width: 0;
+}
+
+#question-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
 
 button {
-  display: block;
-  width: 100%;
   padding: 10px;
-  background-color: #4CAF50; /* Verde dos botões */
-  color: #fff;
+  margin: 10px;
+  background-color: #1c6855;
   border: none;
-  border-radius: 5px;
+  color: white;
   cursor: pointer;
-  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 button:hover {
-  background-color: #45a049; /* Verde mais escuro ao passar o mouse */
+  background-color: #0a2c0b;
 }
 
-.caixa-navegacao {
-  display: flex;
-  justify-content: space-between;
+.hide {
+  display: none;
 }
 
-.caixa-resultados {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.texto-resultado {
-  font-weight: bold;
-  margin-top: 20px;
-}
-
-img {
-  max-width: 100%;
+#result-image {
+  width: 200px;
   height: auto;
-  border-radius: 8px;
+  margin-top: 20px;
 }

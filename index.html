@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<title>Qual personagem do Shrek você seria?</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Qual personagem do Shrek você seria?</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="caixa-principal">
-    <h1>Qual personagem do Shrek você seria?</h1>
-    <div class="caixa-perguntas" id="questions-container"></div>
-    <div class="caixa-navegacao">
-        <button id="prev-btn" onclick="prevQuestion()" disabled>Anterior</button>
-        <button id="next-btn" onclick="nextQuestion()">Próxima</button>
+    <div class="container">
+        <h1>Qual personagem do Shrek você seria?</h1>
+        <div id="quiz-container">
+            <div id="progress-bar"></div>
+            <div id="question-container">
+                <h2 id="question"></h2>
+                <img id="question-image" src="img/Shrek-Logo.png" alt="Imagem da pergunta">
+                <div id="answer-buttons" class="btn-container"></div>
+            </div>
+        </div>
+        <div id="result-container" class="hide">
+            <h2 id="result-title"></h2>
+            <img id="result-image" src="" alt="Resultado do personagem">
+            <p id="result-text"></p>
+        </div>
+        <button id="start-btn">Começar o Quiz</button>
     </div>
-    <div class="caixa-resultados">
-        <p id="result" class="texto-resultado"></p>
-    </div>
-    <button id="submit-btn" type="button" onclick="calculateResult()" style="display:none;">Descubra!</button>
-</div>
+    <script src="main.js"></script>
 </body>
-<script src="main.js"></script>
 </html>
